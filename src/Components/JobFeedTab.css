@@ -1,0 +1,32 @@
+.jobsearch-ResultsList .mt-4 {
+  margin-top: 1.5rem !important;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 0px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.jobsearch-ResultsList {
+  list-style-type: none;
+}
+
+.jobsearch-ResultsList {
+  cursor: pointer;
+}
+
+.jobs-card .badge {
+  display: inline-block;
+  padding: 10px 15px 10px 15px;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  margin-top: 10px;
+}
+
+.resultContent .heading-text {
+  font-size: 22px;
+}

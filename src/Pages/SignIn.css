@@ -1,0 +1,25 @@
+.box-shadow{
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.BsArrowRightShort{
+    font-size: 28px;
+    padding: 0px 0px 0px 0px;
+    margin-bottom: 2px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .btn-link{
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .btn-link{
+        width: 100%;
+        margin-top: -5px;
+        font-size: 14px;
+    }
+}

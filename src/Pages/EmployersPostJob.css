@@ -1,0 +1,50 @@
+.text-white h1{
+    font-weight: 600;
+    font-size: 50px;
+}
+
+
+.banner-text, .alert {
+    position: relative;
+    padding: 20px 10px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.main-box h5{
+    font-size: 20px;
+}
+
+.main-box .bg-light{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .btn-link{
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .btn-link{
+       width: 100%;
+       margin-top: -20px;
+    }
+}
+
+.modal-backdrop.show {
+    opacity: .0;
+}
+
+.modal-backdrop {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}

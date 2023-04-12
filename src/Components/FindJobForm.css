@@ -1,0 +1,81 @@
+.full-coverd .input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.full-coverd .form-control {
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.full-coverd{
+    background-color: white;
+    padding: 15px;
+    border-radius: 6px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.background-banner{
+    height: 300px;
+}
+
+.top-heading {
+    height: 130px;
+    display: flow-root;
+}
+
+.top-heading h2{
+    padding-top: 15px;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .Search-form{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .btn-primary{
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .full-coverd{
+        width: 100%;
+       margin-top: -20px;
+    }
+}
+
+.form-control:focus {
+    /* color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe; */
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0);
+}

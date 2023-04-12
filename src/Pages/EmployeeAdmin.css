@@ -1,0 +1,72 @@
+.data-table table {
+  margin: 0rem 5rem 5rem 7rem;
+  border-radius: 8px;
+  border: 1px solid black;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow: hidden;
+}
+
+.data-table thead {
+  font-size: 15px;
+  background-color: #d3dbd6;
+  color: black;
+}
+
+.data-table th,
+td {
+  min-width: 30px;
+  padding: 10px;
+  width: 20%;
+}
+
+.data-table td {
+  font-size: 15px;
+  border-bottom: 1px solid #dfd8d8;
+}
+
+.data-table .badge {
+  display: inline-block;
+  padding: 9px 7px 10px 10px;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .data-table table {
+    margin: 0rem 5rem 5rem 7rem;
+    border-radius: 8px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .data-table table {
+    margin: 0rem 5rem 5rem 0rem;
+    border-radius: 8px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .data-table table {
+    margin: 0rem 5rem 5rem 0rem;
+    border-radius: 8px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+  }
+}
