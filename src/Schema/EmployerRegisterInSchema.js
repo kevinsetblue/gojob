@@ -5,6 +5,6 @@ export const EmployerRagisterSchema = Yup.object({
     name: Yup.string().min(3).required('Name is Required'),
     email: Yup.string().email().required('Email is Required, Enter Orignal Email'),
     // phoneNumber: Yup.string().required('Phone number is required'),
-    password: Yup.string().min(8).required('Password is required, if you forget your password, change it'),
+    password: Yup.string().min(8).required('Password is required'),
     confirmpassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm Password is Required'),
 })

@@ -61,7 +61,7 @@ const DashBoard = ({ setUser }) => {
                     </div>
                 </div>
             </header> */}
-            <header className="navbar navbar-dark sticky-top bg-info flex-md-nowrap p-0 shadow">
+            <header className="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
                 <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="##">
                     <img src="img/Gojob.png" alt="" width={70} height={35} />
                 </a>
@@ -94,7 +94,7 @@ const DashBoard = ({ setUser }) => {
             <div className="container data-table">
                 {/* <JobSeeker /> */}
                 <h3 className="d-flex justify-content-center">Welcome Admin</h3>
-                <JobSeeker />
+                {/* <JobSeeker /> */}
             </div>
         </>
     );

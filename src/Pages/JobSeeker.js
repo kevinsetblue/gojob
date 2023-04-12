@@ -3,12 +3,28 @@ import '../Pages/EmployeeAdmin.css'
 import axios from "axios";
 import Moment from 'react-moment';
 import SideBar from "../Components/SideBar";
+import { useNavigate } from "react-router-dom";
 
 
+const JobSeeker = ({ setUser }) => {
 
-const JobSeeker = () => {
+    const navigate = useNavigate();
 
 
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            setUser(JSON.parse(user));
+        }
+    }, []);
+
+
+    function handleSignOut() {
+        localStorage.removeItem("admintoken");
+        localStorage.removeItem("adminuser");
+        setUser(null);
+        navigate('/');
+    }
 
 
 
@@ -46,8 +62,8 @@ const JobSeeker = () => {
 
     return (
         <>
-            {/* 
-            <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+
+            <header className="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
                 <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="##">
                     <img src="img/Gojob.png" alt="" width={70} height={35} />
                 </a>
@@ -64,56 +80,54 @@ const JobSeeker = () => {
                 </button>
                 <div class="navbar-nav">
                     <div class="nav-item text-nowrap">
-                        <button className="btn btn-primary">
+                        <button className="btn btn-light" onClick={handleSignOut}>
                             Sign out
                         </button>
                     </div>
                 </div>
-            </header> */}
+            </header>
 
 
             <SideBar />
 
             <div className="container data-table">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Name </th>
-                            <th className="cursor-pointer">Register Method</th>
-                            <th className="cursor-pointer">Date</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div className="table-responsive">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name </th>
+                                <th scope="col" className="cursor-pointer">Register Method</th>
+                                <th scope="col" className="cursor-pointer">Date</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                TableUser && TableUser.map((Data, id) => {
+                                    return (
+                                        <React.Fragment key={id}>
+                                            <tr>
+                                                <td className="table-light">
+                                                    {Data.name}
 
-                        {
-                            TableUser && TableUser.map((Data, id) => {
-                                return (
-                                    <React.Fragment key={id}>
-                                        <tr>
-                                            <td>
-                                                {Data.name}
-
-                                            </td>
-                                            <td>
-
-                                                <div className="badge rounded-pill bg-danger">{Data.registerType}</div>
-
-                                            </td>
-                                            <td>
-
-                                                <Moment format="DD/MM/YYYY">
-                                                    {Data.createdAt}
-                                                </Moment>
-                                            </td>
-                                            <td>{<h6 className="username mt-2">{Data.email}</h6>}</td>
-                                        </tr>
-                                    </React.Fragment>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                                                </td>
+                                                <td className="table-light">
+                                                    <div className="badge rounded-pill bg-danger">{Data.registerType}</div>
+                                                </td>
+                                                <td className="table-light">
+                                                    <Moment format="DD/MM/YYYY">
+                                                        {Data.createdAt}
+                                                    </Moment>
+                                                </td>
+                                                <td className="table-light">{<h6 className="username mt-2" style={{ 'fontSize': '13px' }}>{Data.email}</h6>}</td>
+                                            </tr>
+                                        </React.Fragment>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     );

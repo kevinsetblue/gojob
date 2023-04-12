@@ -36,7 +36,6 @@ const EmployerSignIn = ({ setEmployerUser }) => {
                 });
                 const token = response.data.token;
                 localStorage.setItem("token", token);
-                alert('User Login Successfully');
                 setEmployerUser(response.data.user.name);
                 action.resetForm();
                 navigate('/employerspostjob');
@@ -161,7 +160,7 @@ const EmployerSignIn = ({ setEmployerUser }) => {
                                         <GoogleButton
                                             onClick={() => {
                                                 const auth2 = window.gapi.auth2;
-
+                                                setLoader(true);
                                                 if (!auth2) {
                                                     console.error('Google API client library not initialized.');
                                                     return;

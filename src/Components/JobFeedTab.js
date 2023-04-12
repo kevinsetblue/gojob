@@ -22,13 +22,17 @@ const JobFeedTab = ({ SearchData, NoData }) => {
 
 
 
+
+
+
+
     return (
         <>
             <div className="container jobs-card mt-1">
                 <div className="row">
                     <div className="col-md-6">
                         {
-                            NoData ? <h5 className="text-danger">{NoData}</h5> : SearchData.map((data, id) => {
+                            NoData ? <h5 className="text-danger text-center">{NoData}</h5> : SearchData.map((data, id) => {
                                 return (
                                     <React.Fragment key={id} >
                                         {/* {

@@ -4,8 +4,28 @@ import axios from "axios";
 import SideBar from "../Components/SideBar";
 import '../Pages/AllJobs.css'
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
-const Pricing = () => {
+const Pricing = ({ setUser }) => {
+
+
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            setUser(JSON.parse(user));
+        }
+    }, []);
+
+
+    function handleSignOut() {
+        localStorage.removeItem("admintoken");
+        localStorage.removeItem("adminuser");
+        setUser(null);
+        navigate('/');
+    }
 
 
     const [newPrice, setNewPrice] = useState('');
@@ -75,9 +95,9 @@ const Pricing = () => {
 
     return (
         <>
-            <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <header className="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
                 <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="##">
-                    Welcome Admin
+                    <img src="img/Gojob.png" alt="" width={70} height={35} />
                 </a>
                 <button
                     className="navbar-toggler position-absolute d-md-none collapsed"
@@ -90,7 +110,15 @@ const Pricing = () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
+                <div class="navbar-nav">
+                    <div class="nav-item text-nowrap">
+                        <button className="btn btn-light" onClick={handleSignOut}>
+                            Sign out
+                        </button>
+                    </div>
+                </div>
             </header>
+
 
             <SideBar />
 

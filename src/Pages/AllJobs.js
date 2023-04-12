@@ -6,10 +6,31 @@ import SideBar from "../Components/SideBar";
 import '../Pages/AllJobs.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
-const AllJobs = () => {
+
+const AllJobs = ({ setUser }) => {
 
     const [TableUser, setTableUser] = useState([]);
+
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            setUser(JSON.parse(user));
+        }
+    }, []);
+
+
+    function handleSignOut() {
+        localStorage.removeItem("admintoken");
+        localStorage.removeItem("adminuser");
+        setUser(null);
+        navigate('/');
+    }
+
 
     const GetToken = localStorage.getItem("admintoken");
     // const GetToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJmZmFjNmFkZDM5NjdhMzYxMDg4NDkiLCJpYXQiOjE2ODA5MjYwOTYsImV4cCI6MTY4MDkyOTY5Nn0.1U_o9KDtL3VIsIBk_ASjGdJmvZXo7xeswQJ2ksX60ho"
@@ -97,9 +118,9 @@ const AllJobs = () => {
     return (
         <>
 
-            <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <header className="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
                 <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="##">
-                    Welcome Admin
+                    <img src="img/Gojob.png" alt="" width={70} height={35} />
                 </a>
                 <button
                     className="navbar-toggler position-absolute d-md-none collapsed"
@@ -112,6 +133,13 @@ const AllJobs = () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
+                <div class="navbar-nav">
+                    <div class="nav-item text-nowrap">
+                        <button className="btn btn-light" onClick={handleSignOut}>
+                            Sign out
+                        </button>
+                    </div>
+                </div>
             </header>
 
             <SideBar />
@@ -144,64 +172,64 @@ const AllJobs = () => {
                 Status ? <h5 className="text-success text-center">{Status}</h5> : null
             }
             <div className="container data-table">
+                <div className="table-responsive">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Date </th>
+                                <th>Company Name </th>
+                                <th className="cursor-pointer">Jobtitle</th>
+                                <th className="cursor-pointer">Days</th>
+                                <th>Active</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
 
 
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Date </th>
-                            <th>Company Name </th>
-                            <th className="cursor-pointer">Jobtitle</th>
-                            <th className="cursor-pointer">Days</th>
-                            <th>Active</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
+                            {TableUser && TableUser.map((Data, id) => {
+                                const jobId = Data.jobId;
+                                var nm = Data.isActive;
+                                // console.log(jobId);
 
 
-                        {TableUser && TableUser.map((Data, id) => {
-                            const jobId = Data.jobId;
-                            var nm = Data.isActive;
-                            // console.log(jobId);
+                                return (
+                                    <React.Fragment key={id}>
 
-
-                            return (
-                                <React.Fragment key={id}>
-
-                                    <tr>
-                                        <td>
-                                            <Moment format="DD/MM/YYYY">
-                                                {Data.updatedAt}
-                                            </Moment>
-                                        </td>
-                                        <td>
-                                            <h6 className="username mt-2">{Data.companyName}</h6>
-                                        </td>
-                                        <td>
-                                            <div className="badge rounded-pill bg-danger">{Data.jobTitle}</div>
-                                        </td>
-                                        <td>
-                                            {Data.daysRemaining}
-                                        </td>
-                                        <td>
-                                            <div className="form-check form-switch">
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    role="switch"
-                                                    id={`flexSwitchCheckChecked-${jobId}`}
-                                                    defaultChecked={Data.isActive}
-                                                    onChange={(e) => handleCheckboxClick(jobId, Data.isActive, e.target.checked)}
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </React.Fragment>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                                        <tr>
+                                            <td>
+                                                <Moment format="DD/MM/YYYY">
+                                                    {Data.updatedAt}
+                                                </Moment>
+                                            </td>
+                                            <td>
+                                                <h6 className="username mt-2">{Data.companyName}</h6>
+                                            </td>
+                                            <td>
+                                                <div className="badge rounded-pill bg-danger">{Data.jobTitle}</div>
+                                            </td>
+                                            <td>
+                                                {Data.daysRemaining}
+                                            </td>
+                                            <td>
+                                                <div className="form-check form-switch">
+                                                    <input
+                                                        className="form-check-input"
+                                                        type="checkbox"
+                                                        role="switch"
+                                                        id={`flexSwitchCheckChecked-${jobId}`}
+                                                        defaultChecked={Data.isActive}
+                                                        onChange={(e) => handleCheckboxClick(jobId, Data.isActive, e.target.checked)}
+                                                    />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </React.Fragment>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <ToastContainer />
         </>

@@ -156,7 +156,7 @@ const Ragister = ({ setUser }) => {
                                 <GoogleButton
                                     onClick={() => {
                                         const auth2 = window.gapi.auth2;
-
+                                        setLoader(true);
                                         if (!auth2) {
                                             console.error('Google API client library not initialized.');
                                             return;

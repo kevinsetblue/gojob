@@ -160,7 +160,7 @@ const EmployerRegister = ({ setUser }) => {
                                 <GoogleButton
                                     onClick={() => {
                                         const auth2 = window.gapi.auth2;
-
+                                        setLoader(true);
                                         if (!auth2) {
                                             console.error('Google API client library not initialized.');
                                             return;
@@ -256,7 +256,7 @@ const EmployerRegister = ({ setUser }) => {
                                         <b>Confirm Password</b>
                                     </label>
                                     <input
-                                        type="confirmpassword"
+                                        type="password"
                                         name="confirmpassword"
                                         className="form-control"
                                         id="exampleInputConfirmPassword1"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../Pages/EmployersPostJob.css'
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
@@ -122,6 +122,20 @@ const EmployersPostJob = () => {
             // notify('Please Login');
         }
     }
+
+    const [pricevalue, setPricevalue] = useState([]);
+    const getprice = () => {
+        // const GetToken = localStorage.getItem("admintoken");
+        axios.get('https://gojob-x5qp.onrender.com/api/jobprice')
+            .then(response => {
+                console.log(response.data.price);
+                setPricevalue(response.data.price)
+            })
+    }
+
+    useEffect(() => {
+        getprice()
+    }, []);
 
 
     return (
@@ -284,7 +298,7 @@ const EmployersPostJob = () => {
 
             <div className="alert alert-dark bg-black rounded-0" role="alert">
                 <div className="text-center text-white">
-                    The job poster will pay 15$ to post a job for 30 days.
+                    The job poster will pay {pricevalue}$ to post a job for 30 days.
                 </div>
             </div>
 
