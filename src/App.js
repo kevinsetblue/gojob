@@ -63,12 +63,12 @@ function App() {
         <Route exact path="/ragister" element={<Ragister />} />
         <Route exact path="/employerregister" element={<EmployerRegister />} />
         <Route exact path="/dashboard" element={<DashBoard User={User} setUser={setUser} />} />
-        <Route exact path="/adminlogin" element={<AdminLogin />} />
-        <Route exact path="/jobseeker" element={<JobSeeker />} />
-        <Route exact path="/allemployer" element={<AllEmployer />} />
-        <Route exact path="/alljobs" element={<AllJobs />} />
-        <Route exact path="/pricing" element={<Pricing />} />
-        <Route exact path="/changeduration" element={<ChangeDuration />} />
+        <Route exact path="/adminlogin" element={<AdminLogin setUser={setUser} />} />
+        <Route exact path="/jobseeker" element={<JobSeeker setUser={setUser} />} />
+        <Route exact path="/allemployer" element={<AllEmployer setUser={setUser} />} />
+        <Route exact path="/alljobs" element={<AllJobs setUser={setUser} />} />
+        <Route exact path="/pricing" element={<Pricing setUser={setUser} />} />
+        <Route exact path="/changeduration" element={<ChangeDuration setUser={setUser} />} />
       </Routes>
       {
         location !== "/adminlogin"
