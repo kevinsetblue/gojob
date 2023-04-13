@@ -1,8 +1,32 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../Components/SideBar";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
-const ChangeDuration = () => {
+
+const ChangeDuration = ({ setUser }) => {
+
+
+
+
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            setUser(JSON.parse(user));
+        }
+    }, []);
+
+
+    function handleSignOut() {
+        localStorage.removeItem("admintoken");
+        localStorage.removeItem("adminuser");
+        setUser(null);
+        navigate('/');
+    }
+
 
 
 
@@ -55,15 +79,6 @@ const ChangeDuration = () => {
 
 
 
-
-
-
-
-
-
-
-
-
     const [pricevalue, setPricevalue] = useState([]);
     const getjob = () => {
         // const GetToken = localStorage.getItem("admintoken");
@@ -84,9 +99,9 @@ const ChangeDuration = () => {
 
     return (
         <>
-            <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <header className="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
                 <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="##">
-                    Welcome Admin
+                    <img src="img/Gojob.png" alt="" width={70} height={35} />
                 </a>
                 <button
                     className="navbar-toggler position-absolute d-md-none collapsed"
@@ -99,6 +114,13 @@ const ChangeDuration = () => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
+                <div class="navbar-nav">
+                    <div class="nav-item text-nowrap">
+                        <button className="btn btn-light" onClick={handleSignOut}>
+                            Sign out
+                        </button>
+                    </div>
+                </div>
             </header>
 
             <SideBar />
@@ -125,7 +147,7 @@ const ChangeDuration = () => {
                     Duration of Job:
                     <input
                         className="form-control me-2"
-                        type="search"
+                        type="number"
                         placeholder="Search"
                         aria-label="Search"
                         value={pricevalue}

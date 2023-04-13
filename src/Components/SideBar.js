@@ -11,12 +11,6 @@ const SideBar = () => {
                 <div className="position-relative pt-3">
                     <ul className="nav flex-column">
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to='/dashboard'>
-                                <span data-feather="home" />
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li className="nav-item">
                             <Link className="nav-link" to='/jobseeker'>
                                 <span data-feather="file" />
                                 Job Seeker

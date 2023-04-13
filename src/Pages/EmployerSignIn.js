@@ -83,6 +83,7 @@ const EmployerSignIn = ({ setEmployerUser }) => {
                 if (error.response.data.error) {
                     setNotRegisterd(false);
                     setErrorMessage(error.response.data.error);
+                    setLoader(false);
                 }
             }
             else {

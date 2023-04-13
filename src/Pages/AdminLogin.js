@@ -39,7 +39,7 @@ const AdminLogin = ({ setUser, setGoogleUser }) => {
                 localStorage.setItem("adminuser", JSON.stringify(response.data.user))
                 // setUser(response.data.user.name);
                 action.resetForm();
-                navigate('/dashboard');
+                navigate('/jobseeker');
             }
             catch (error) {
                 console.error(error);

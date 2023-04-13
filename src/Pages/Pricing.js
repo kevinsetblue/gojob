@@ -146,7 +146,7 @@ const Pricing = ({ setUser }) => {
                     </label>
                     <input
                         className="form-control me-2"
-                        type="search"
+                        type="number"
                         placeholder="enter price"
                         aria-label="Search"
                         value={pricevalue}

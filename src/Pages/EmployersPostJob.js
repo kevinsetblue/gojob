@@ -44,7 +44,7 @@ const EmployersPostJob = () => {
             purchase_units: [
                 {
                     amount: {
-                        value: "10.00",
+                        value: pricevalue,
                     },
                 },
             ],
@@ -135,6 +135,22 @@ const EmployersPostJob = () => {
 
     useEffect(() => {
         getprice()
+    }, []);
+
+
+
+    const [pricedaysvalue, setPricedaysvalue] = useState([]);
+    const getjob = () => {
+        // const GetToken = localStorage.getItem("admintoken");
+        axios.get('https://gojob-x5qp.onrender.com/api/jobdays')
+            .then(response => {
+                console.log(response.data.days);
+                setPricedaysvalue(response.data.days)
+            })
+    }
+
+    useEffect(() => {
+        getjob()
     }, []);
 
 
@@ -298,7 +314,7 @@ const EmployersPostJob = () => {
 
             <div className="alert alert-dark bg-black rounded-0" role="alert">
                 <div className="text-center text-white">
-                    The job poster will pay {pricevalue}$ to post a job for 30 days.
+                    The job poster will pay {pricevalue}$ to post a job for {pricedaysvalue} days.
                 </div>
             </div>
 

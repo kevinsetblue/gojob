@@ -7,11 +7,12 @@ import '../Pages/AllJobs.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
-
+import { ColorRing } from 'react-loader-spinner'
 
 const AllJobs = ({ setUser }) => {
 
     const [TableUser, setTableUser] = useState([]);
+    const [Loader, setLoader] = useState(true);
 
     const navigate = useNavigate();
 
@@ -48,6 +49,7 @@ const AllJobs = ({ setUser }) => {
             .then(response => {
                 // console.log(response.data.info);
                 setTableUser(response.data.info);
+                setLoader(false);
             })
     }
 
@@ -143,6 +145,23 @@ const AllJobs = ({ setUser }) => {
             </header>
 
             <SideBar />
+
+
+            <div className="loader-center text-center">
+                {
+                    Loader ? <ColorRing
+                        visible={true}
+                        height="80"
+                        width="80"
+                        ariaLabel="blocks-loading"
+                        wrapperStyle={{}}
+                        wrapperClass="blocks-wrapper"
+                        colors={['black']}
+                    />
+                        : null
+                }
+            </div>
+
 
             {
                 popupVisible && (

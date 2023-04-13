@@ -4,9 +4,11 @@ import axios from "axios";
 import Moment from 'react-moment';
 import SideBar from "../Components/SideBar";
 import { useNavigate } from "react-router-dom";
-
+import { ColorRing } from 'react-loader-spinner'
 
 const JobSeeker = ({ setUser }) => {
+
+    const [Loader, setLoader] = useState(true);
 
     const navigate = useNavigate();
 
@@ -49,6 +51,7 @@ const JobSeeker = ({ setUser }) => {
             .then(response => {
                 // console.log(response.data.info);
                 setTableUser(response.data.info);
+                setLoader(false);
             })
     }
 
@@ -89,6 +92,23 @@ const JobSeeker = ({ setUser }) => {
 
 
             <SideBar />
+
+
+            <div className="loader-center text-center">
+                {
+                    Loader ? <ColorRing
+                        visible={true}
+                        height="80"
+                        width="80"
+                        ariaLabel="blocks-loading"
+                        wrapperStyle={{}}
+                        wrapperClass="blocks-wrapper"
+                        colors={['black']}
+                    />
+                        : null
+                }
+            </div>
+
 
             <div className="container data-table">
                 <div className="table-responsive">

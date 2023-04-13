@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './Components/Navbar';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import SignIn from './Pages/SignIn';
 import Footer from './Components/Footer';
 import FindJobs from './Pages/FindJobs';
@@ -14,7 +14,6 @@ import EmployerRegister from './Pages/EmployerRegister';
 import AdminLogin from './Pages/AdminLogin';
 import JobSeeker from './Pages/JobSeeker';
 import AllEmployer from './Pages/AllEmployer';
-import DashBoard from './Pages/DashBoard';
 import AllJobs from './Pages/AllJobs';
 import ErrorPage from './Components/ErrorPage';
 import Pricing from './Pages/Pricing';
@@ -29,6 +28,11 @@ function App() {
 
   const location = useLocation().pathname;
   const isEmployerRoute = location === '/employerspostjob';
+  const isJobSeekerRoute = location === '/jobseeker';
+  const isEmployerListRoute = location === '/allemployer';
+  const isAllJobsRoute = location === '/alljobs';
+  const isPricingRoute = location === '/pricing';
+  const isChangeDurationRoute = location === '/changeduration';
 
   if (location === '/adminlogin') {
     return (
@@ -41,18 +45,16 @@ function App() {
           <Route exact path="/pricing" element={<Pricing setUser={setUser} />} />
           <Route exact path="/changeduration" element={<ChangeDuration setUser={setUser} />} />
         </Routes>
-
       </>
     )
   }
-
 
   return (
     <>
       {isEmployerRoute ? (
         <EmployeNavbar EmployerUser={EmployerUser} setEmployerUser={setEmployerUser} />
       ) : (
-        <Navbar User={User} setUser={setUser} />
+        isJobSeekerRoute || isEmployerListRoute || isAllJobsRoute || isPricingRoute || isChangeDurationRoute ? null : <Navbar User={User} setUser={setUser} />
       )}
       <Routes>
         <Route exact path="/" element={<FindJobs />} />
@@ -62,7 +64,6 @@ function App() {
         <Route exact path="/employerspostjob" element={<EmployersPostJob pricevalue={pricevalue} />} />
         <Route exact path="/ragister" element={<Ragister />} />
         <Route exact path="/employerregister" element={<EmployerRegister />} />
-        <Route exact path="/dashboard" element={<DashBoard User={User} setUser={setUser} />} />
         <Route exact path="/adminlogin" element={<AdminLogin setUser={setUser} />} />
         <Route exact path="/jobseeker" element={<JobSeeker setUser={setUser} />} />
         <Route exact path="/allemployer" element={<AllEmployer setUser={setUser} />} />
@@ -72,14 +73,13 @@ function App() {
       </Routes>
       {
         location !== "/adminlogin"
-        && location !== "/dashboard"
-        && location !== '/jobseeker'
-        && location !== '/alljobs'
-        && location !== '/allemployer'
-        && location !== '/pricing'
-        && location !== '/changeduration'
+        && !isJobSeekerRoute
+        && !isEmployerListRoute
+        && !isAllJobsRoute
+        && !isPricingRoute
+        && !isChangeDurationRoute
         && location !== '/forgetpassword'
-        && <Footer />
+        && (isEmployerRoute ? null : <Footer />)
       }
     </>
   );
