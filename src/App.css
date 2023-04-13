@@ -40,3 +40,18 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+@media screen and (max-width: 768px) {
+   .navbar-brand{
+         margin-left: 45px;
+   }
+}
+
+@media screen and (max-width: 600px) {
+.navbar-brand{
+         margin-left: 45px;
+   }
+}
