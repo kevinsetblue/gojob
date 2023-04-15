@@ -9,7 +9,7 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { useNavigate } from "react-router-dom";
 import GoogleButton from 'react-google-button';
-import { ColorRing } from 'react-loader-spinner'
+import { ColorRing } from 'react-loader-spinner';
 
 
 const Ragister = ({ setUser }) => {
@@ -32,7 +32,7 @@ const Ragister = ({ setUser }) => {
     }
 
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue } = useFormik({
         initialValues: initialValues,
         validationSchema: RagisterSchema,
         onSubmit: async (values, action) => {
@@ -44,9 +44,13 @@ const Ragister = ({ setUser }) => {
                     password: values.password,
                     phoneNumber: phoneNumber,
                 });
+                console.log(response.data)
                 const token = response.data.token;
                 localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify(response.data.user))
+                setUser(response.data.user.name);
                 action.resetForm();
+                // setLoader(false);
                 navigate('/');
 
             }
@@ -230,11 +234,16 @@ const Ragister = ({ setUser }) => {
                                     <PhoneInput
                                         placeholder="Enter phone number"
                                         value={values.phoneNumber}
-                                        onChange={setphoneNumber}
-                                        defaultCountry="US"
+                                        onChange={(phoneNumber) => {
+                                            setFieldValue('phoneNumber', phoneNumber);
+                                        }}
+                                        onBlur={handleBlur}
+                                        defaultCountry="IN"
                                         international
                                     />
-                                    {errors.phoneNumber && touched.phoneNumber ? <h6 className="text-danger">{errors.phoneNumber}</h6> : null}
+                                    {errors.phoneNumber && touched.phoneNumber ? (
+                                        <h6 className="text-danger">{errors.phoneNumber}</h6>
+                                    ) : null}
                                     <label htmlFor="exampleInputPassword1" className="form-label">
                                         <b>Password</b>
                                     </label>
@@ -279,7 +288,6 @@ const Ragister = ({ setUser }) => {
                         </div>
 
                     </div>
-
                     <div className="col-md-3"></div>
                 </div>
             </div>

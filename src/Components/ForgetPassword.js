@@ -3,11 +3,13 @@ import { BsArrowRightShort } from "react-icons/bs";
 import { useFormik } from 'formik';
 import { ForgetPasswordScema } from "../Schema/ForgetPasswordSchema";
 import axios from "axios";
-import { ColorRing } from 'react-loader-spinner'
+import { ColorRing } from 'react-loader-spinner';
+import { useNavigate } from "react-router-dom";
 
 
 const ForgetPassword = () => {
 
+    const nevigate = useNavigate();
 
     const initialValues = {
         email: '',
@@ -29,6 +31,8 @@ const ForgetPassword = () => {
                 console.log(response);
                 setSuccessfullysent(true);
                 action.resetForm();
+                nevigate('/signin')
+                setLoader(false);
             }
             catch (error) {
                 console.log(error);

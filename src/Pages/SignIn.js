@@ -240,9 +240,10 @@ const SignIn = ({ setUser, setGoogleUser }) => {
                                             <input
                                                 type="email"
                                                 name="email"
+                                                autoComplete="off"
                                                 className="form-control"
                                                 id="exampleInputEmail1"
-                                                aria-describedby="emailHelp"
+                                                // aria-describedby="emailHelp"
                                                 value={values.email}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
@@ -255,6 +256,7 @@ const SignIn = ({ setUser, setGoogleUser }) => {
                                             <input
                                                 type="password"
                                                 name="password"
+                                                autoComplete="off"
                                                 className="form-control"
                                                 id="exampleInputPassword1"
                                                 value={values.password}

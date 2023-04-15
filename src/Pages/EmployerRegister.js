@@ -12,11 +12,10 @@ import { EmployerRagisterSchema } from "../Schema/EmployerRegisterInSchema";
 import { ColorRing } from 'react-loader-spinner'
 
 
-const EmployerRegister = ({ setUser }) => {
+const EmployerRegister = ({ setEmployerUser }) => {
 
 
 
-    const [phoneNumber, setphoneNumber] = useState('');
     const [Register, setRegister] = useState(false);
     const [NotRegisterd, setNotRegisterd] = useState(false);
     const [ErrorMessage, setErrorMessage] = useState('');
@@ -33,7 +32,7 @@ const EmployerRegister = ({ setUser }) => {
     }
 
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue } = useFormik({
         initialValues: initialValues,
         validationSchema: EmployerRagisterSchema,
         onSubmit: async (values, action) => {
@@ -43,7 +42,7 @@ const EmployerRegister = ({ setUser }) => {
                     name: values.name,
                     email: values.email,
                     password: values.password,
-                    phoneNumber: phoneNumber,
+                    phoneNumber: values.phoneNumber,
                 });
                 const token = response.data.token;
                 localStorage.setItem("token", token);
@@ -80,7 +79,7 @@ const EmployerRegister = ({ setUser }) => {
             const response = await axios.post('https://gojob-x5qp.onrender.com/api/employer/register/google', { idToken });
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
-            setUser(response.data.user.name);
+            setEmployerUser(response.data.user.name);
             // window.location.href = '/';
             navigate('/employerspostjob')
         } catch (error) {
@@ -214,32 +213,22 @@ const EmployerRegister = ({ setUser }) => {
                                     />
                                     {errors.email && touched.email ? <h6 className="text-danger">{errors.email}</h6> : null}
 
-                                    {/* <label htmlFor="exampleInputnumber" className="form-label">
-                                        <b>Phone No.</b>
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="phoneNumber"
-                                        className="form-control"
-                                        id="exampleInputnumber1"
-                                        aria-describedby="numberHelp"
-                                        value={values.phoneNumber}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    {errors.phoneNumber && touched.phoneNumber ? <h6 className="text-danger">{errors.phoneNumber}</h6> : null} */}
-
                                     <label htmlFor="exampleInputnumber" className="form-label">
                                         <b>Phone No.</b>
                                     </label>
                                     <PhoneInput
                                         placeholder="Enter phone number"
                                         value={values.phoneNumber}
-                                        onChange={setphoneNumber}
-                                        defaultCountry="US"
+                                        onChange={(phoneNumber) => {
+                                            setFieldValue('phoneNumber', phoneNumber);
+                                        }}
+                                        onBlur={handleBlur}
+                                        defaultCountry="IN"
                                         international
                                     />
-                                    {errors.phoneNumber && touched.phoneNumber ? <h6 className="text-danger">{errors.phoneNumber}</h6> : null}
+                                    {errors.phoneNumber && touched.phoneNumber ? (
+                                        <h6 className="text-danger">{errors.phoneNumber}</h6>
+                                    ) : null}
                                     <label htmlFor="exampleInputPassword1" className="form-label">
                                         <b>Password</b>
                                     </label>

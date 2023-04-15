@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './Components/Navbar';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import SignIn from './Pages/SignIn';
 import Footer from './Components/Footer';
 import FindJobs from './Pages/FindJobs';
@@ -15,7 +15,6 @@ import AdminLogin from './Pages/AdminLogin';
 import JobSeeker from './Pages/JobSeeker';
 import AllEmployer from './Pages/AllEmployer';
 import AllJobs from './Pages/AllJobs';
-import ErrorPage from './Components/ErrorPage';
 import Pricing from './Pages/Pricing';
 import ChangeDuration from './Pages/ChangeDuration';
 function App() {
@@ -23,7 +22,7 @@ function App() {
   const [User, setUser] = useState(null);
   const [EmployerUser, setEmployerUser] = useState(null);
   const [pricevalue, setPricevalue] = useState([]);
-  // const [GoogleUser, setGoogleUser] = useState(null);
+
 
 
   const location = useLocation().pathname;
@@ -62,7 +61,7 @@ function App() {
         <Route exact path="/employersignin" element={<EmployerSignIn EmployerUser={EmployerUser} setEmployerUser={setEmployerUser} />} />
         <Route exact path="/forgetpassword" element={<ForgetPassword />} />
         <Route exact path="/employerspostjob" element={<EmployersPostJob pricevalue={pricevalue} />} />
-        <Route exact path="/ragister" element={<Ragister />} />
+        <Route exact path="/ragister" element={<Ragister setUser={setUser} />} />
         <Route exact path="/employerregister" element={<EmployerRegister />} />
         <Route exact path="/adminlogin" element={<AdminLogin setUser={setUser} />} />
         <Route exact path="/jobseeker" element={<JobSeeker setUser={setUser} />} />
@@ -73,13 +72,13 @@ function App() {
       </Routes>
       {
         location !== "/adminlogin"
-        && !isJobSeekerRoute
-        && !isEmployerListRoute
-        && !isAllJobsRoute
-        && !isPricingRoute
-        && !isChangeDurationRoute
-        && location !== '/forgetpassword'
-        && (isEmployerRoute ? null : <Footer />)
+          && !isJobSeekerRoute
+          && !isEmployerListRoute
+          && !isAllJobsRoute
+          && !isPricingRoute
+          && !isChangeDurationRoute
+          && location !== '/forgetpassword'
+          && isEmployerRoute ? null : <Footer />
       }
     </>
   );

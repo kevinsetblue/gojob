@@ -8,12 +8,12 @@ const Navbar = ({ User, setUser, }) => {
     const navigate = useNavigate();
 
 
-    useEffect(() => {
-        const user = localStorage.getItem('user');
-        if (user) {
-            setUser(JSON.parse(user));
-        }
-    }, []);
+    // useEffect(() => {
+    //     const user = localStorage.getItem('user');
+    //     if (user) {
+    //         setUser(JSON.parse(user));
+    //     }
+    // }, []);
 
 
     function handleSignOut() {
@@ -66,8 +66,6 @@ const Navbar = ({ User, setUser, }) => {
                                                     </>
                                                     : "Sign in"
                                             }
-
-
                                         </button>
                                     </Link>
                                 </li>

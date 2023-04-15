@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useForm } from "react-hook-form";
+
+
+
 const EmployersPostJob = () => {
     const [Text, setText] = useState("");
     const [Email, setEmail] = useState("");
@@ -104,6 +108,21 @@ const EmployersPostJob = () => {
     };
 
 
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({});
+
+    const onSubmit = (event) => {
+        const form = event.target;
+        const formData = new FormData(form);
+        setFormData(formData);
+        handleApprove()
+    };
+
+
+
 
     const navigate = useNavigate();
     // const notify = (message) => toast(message);
@@ -174,6 +193,8 @@ const EmployersPostJob = () => {
                                     showPopup && (
                                         <div className="popup">
                                             <div className="blue-pop">
+
+
                                                 <form onSubmit={handleFormSubmit}>
                                                     <div className="company-name mt-3">
                                                         <label htmlFor="" className="text-start text-black d-flex">
@@ -293,6 +314,12 @@ const EmployersPostJob = () => {
                                                     </div>
                                                 </form>
                                                 <button onClick={togglePopup}>Close</button>
+
+
+
+
+
+
                                             </div>
                                         </div>
                                     )
