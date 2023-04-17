@@ -86,6 +86,7 @@ function App() {
         location !== '/alljobs' &&
         location !== '/pricing' &&
         location !== '/changeduration' &&
+        location !== '/forgetpassword' &&
         <Footer />
 
       }
