@@ -16,6 +16,7 @@ const EmployerRegister = ({ setEmployerUser }) => {
 
 
 
+    const [phoneNumber, setphoneNumber] = useState('');
     const [Register, setRegister] = useState(false);
     const [NotRegisterd, setNotRegisterd] = useState(false);
     const [ErrorMessage, setErrorMessage] = useState('');
@@ -46,6 +47,9 @@ const EmployerRegister = ({ setEmployerUser }) => {
                 });
                 const token = response.data.token;
                 localStorage.setItem("token", token);
+                if (response.data.user && response.data.user.name) {
+                    setEmployerUser(response.data.user.name);
+                }
                 action.resetForm();
                 navigate('/employerspostjob');
 
@@ -67,7 +71,7 @@ const EmployerRegister = ({ setEmployerUser }) => {
 
     const handleGoogleLogin = async (googleUser) => {
         const auth2 = window.gapi.auth2;
-
+        setLoader(true);
         if (!auth2) {
             console.error('Google API client library not initialized.');
             return;
@@ -160,7 +164,6 @@ const EmployerRegister = ({ setEmployerUser }) => {
                                 <GoogleButton
                                     onClick={() => {
                                         const auth2 = window.gapi.auth2;
-                                        setLoader(true);
                                         if (!auth2) {
                                             console.error('Google API client library not initialized.');
                                             return;
@@ -212,6 +215,7 @@ const EmployerRegister = ({ setEmployerUser }) => {
                                         onBlur={handleBlur}
                                     />
                                     {errors.email && touched.email ? <h6 className="text-danger">{errors.email}</h6> : null}
+
 
                                     <label htmlFor="exampleInputnumber" className="form-label">
                                         <b>Phone No.</b>
