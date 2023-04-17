@@ -78,7 +78,16 @@ function App() {
           && !isPricingRoute
           && !isChangeDurationRoute
           && location !== '/forgetpassword'
-          && isEmployerRoute ? null : <Footer />
+          && !isEmployerRoute ? null : null
+      }
+      {
+        location !== "/jobseeker" &&
+        location !== '/allemployer' &&
+        location !== '/alljobs' &&
+        location !== '/pricing' &&
+        location !== '/changeduration' &&
+        <Footer />
+
       }
     </>
   );
