@@ -5,22 +5,16 @@ import './JobFeedTab.css';
 const JobFeedTab = ({ SearchData, NoData }) => {
 
     const [NewCard, setNewCard] = useState(true);
-    // const [Loader, setLoader] = useState(true);
-
 
     const Opencard = () => {
         setNewCard(true);
     }
-    // debugger
+
     const [SelectJob, setSelectJob] = useState(SearchData[0]);
-    // debugger
     const SelectCard = (data12) => {
         const JobCard = data12;
         setSelectJob(JobCard);
     }
-
-
-
 
 
 
@@ -35,17 +29,8 @@ const JobFeedTab = ({ SearchData, NoData }) => {
                             NoData ? <h5 className="text-danger text-center">{NoData}</h5> : SearchData.map((data, id) => {
                                 return (
                                     <React.Fragment key={id} >
-                                        {/* {
-                                            id === 0 ? console.log("id ", id) : null
-                                        }
-                                        {
-                                            id === 0 ? () => setSelectJob(data) : null
-                                        } */}
                                         <div className="jobsearch-ResultsList" >
                                             <li>
-                                                {/* {
-                                                    console.log(data)
-                                                } */}
                                                 <div className="card mt-4" onClick={() => SelectCard(data)}>
                                                     {
                                                         id === 0 ? () => SelectCard(data) : null
@@ -67,7 +52,6 @@ const JobFeedTab = ({ SearchData, NoData }) => {
                                                                             <span
                                                                                 className="heading-text"
                                                                                 title="Manager - IT"
-                                                                            // id={`jobTitle-${data.id}`}
                                                                             >
                                                                                 {data.jobTitle}
                                                                             </span>
@@ -93,7 +77,6 @@ const JobFeedTab = ({ SearchData, NoData }) => {
                                                                                 className="attribute_snippet text-secondary"
                                                                                 data-testid="attribute_snippet_testid"
                                                                             >
-
                                                                                 {data.SearchData}
                                                                             </div>
                                                                         </div>
@@ -125,18 +108,22 @@ const JobFeedTab = ({ SearchData, NoData }) => {
                                 )
                             })
                         }
-
                     </div>
 
                     <div className="col-md-6">
-
                         {
-                            NoData ? null : <ApplyJobCard SearchData={SearchData} Opencard={Opencard} SelectJob={SelectJob} SelectCard={SelectCard} />
+                            NoData ? null
+                                : <ApplyJobCard
+                                    SearchData={SearchData}
+                                    Opencard={Opencard}
+                                    SelectJob={SelectJob}
+                                    SelectCard={SelectCard}
+                                />
                         }
                     </div>
 
-                </div >
-            </div >
+                </div>
+            </div>
 
         </>
     );

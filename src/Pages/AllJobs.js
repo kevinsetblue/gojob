@@ -34,7 +34,6 @@ const AllJobs = ({ setUser }) => {
 
 
     const GetToken = localStorage.getItem("admintoken");
-    // const GetToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJmZmFjNmFkZDM5NjdhMzYxMDg4NDkiLCJpYXQiOjE2ODA5MjYwOTYsImV4cCI6MTY4MDkyOTY5Nn0.1U_o9KDtL3VIsIBk_ASjGdJmvZXo7xeswQJ2ksX60ho"
 
     const getTableData = () => {
 
@@ -47,7 +46,6 @@ const AllJobs = ({ setUser }) => {
             }
         )
             .then(response => {
-                // console.log(response.data.info);
                 setTableUser(response.data.info);
                 setLoader(false);
             })
@@ -100,8 +98,6 @@ const AllJobs = ({ setUser }) => {
             }
         )
             .then(response => {
-
-
                 if (response.data.message) {
                     setStaus(response.data.message)
                     notify(`Status changed to ${response.data.message}`);
@@ -209,8 +205,6 @@ const AllJobs = ({ setUser }) => {
                             {TableUser && TableUser.map((Data, id) => {
                                 const jobId = Data.jobId;
                                 var nm = Data.isActive;
-                                // console.log(jobId);
-
 
                                 return (
                                     <React.Fragment key={id}>

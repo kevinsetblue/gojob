@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { EmployersSignInGoJobSchema } from "../Schema/EmployerSignInSchema";
 import GoogleButton from 'react-google-button';
-import { ColorRing } from 'react-loader-spinner'
+import { ColorRing } from 'react-loader-spinner';
 
 const EmployerSignIn = ({ setEmployerUser }) => {
 
@@ -29,13 +29,12 @@ const EmployerSignIn = ({ setEmployerUser }) => {
         onSubmit: async (values, action) => {
             setLoader(true);
             try {
-                const response = await axios.post(
-                    'https://gojob-x5qp.onrender.com/api/employer/login/email', {
+                const response = await axios.post('https://gojob-x5qp.onrender.com/api/employer/login/email', {
                     email: values.email,
                     password: values.password
                 });
-                const token = response.data.token;
-                localStorage.setItem("token", token);
+                const Employertoken = response.data.token;
+                localStorage.setItem("Employertoken", Employertoken);
                 setEmployerUser(response.data.user.name);
                 action.resetForm();
                 navigate('/employerspostjob');
@@ -63,7 +62,7 @@ const EmployerSignIn = ({ setEmployerUser }) => {
 
     const handleGoogleLogin = async (googleUser) => {
         const auth2 = window.gapi.auth2;
-
+        setLoader(true);
         if (!auth2) {
             console.error('Google API client library not initialized.');
             return;
@@ -73,10 +72,9 @@ const EmployerSignIn = ({ setEmployerUser }) => {
 
         try {
             const response = await axios.post('https://gojob-x5qp.onrender.com/api/employer/login/google', { idToken });
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('Employertoken', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             setEmployerUser(response.data.user.name);
-            // window.location.href = '/';
             navigate('/employerspostjob');
         } catch (error) {
             if (error.response && error.response.status === 400) {
@@ -89,7 +87,6 @@ const EmployerSignIn = ({ setEmployerUser }) => {
             else {
                 setNotRegisterd(true);
             }
-            // window.location.href = '/signin';
         }
     };
 
@@ -161,7 +158,6 @@ const EmployerSignIn = ({ setEmployerUser }) => {
                                         <GoogleButton
                                             onClick={() => {
                                                 const auth2 = window.gapi.auth2;
-                                                setLoader(true);
                                                 if (!auth2) {
                                                     console.error('Google API client library not initialized.');
                                                     return;

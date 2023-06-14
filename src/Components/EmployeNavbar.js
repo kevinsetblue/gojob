@@ -13,8 +13,8 @@ const EmployeNavbar = ({ EmployerUser, setEmployerUser }) => {
         }
     }, []);
 
-    function handleSignOut() {
-        localStorage.removeItem("token");
+    const handleSignOut = () => {
+        localStorage.removeItem("Employertoken");
         localStorage.removeItem("user");
         setEmployerUser(null);
         navigate('/');
@@ -55,9 +55,6 @@ const EmployeNavbar = ({ EmployerUser, setEmployerUser }) => {
                                             {
                                                 EmployerUser ?
                                                     <>
-                                                        {/* <span className="navbar-text text-white">
-                                                            Logged in as {User}
-                                                        </span> */}
                                                         <span className="navbar-text text-white ml-2">
                                                             Sign out
                                                         </span>

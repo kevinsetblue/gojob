@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Popup from 'reactjs-popup';
+import React, { useState } from "react";
 import 'reactjs-popup/dist/index.css';
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import 'react-toastify/dist/ReactToastify.css';
-import './ApplyJobCard.css'
+import './ApplyJobCard.css';
 import { Applyjobresume } from "../Schema/Applyjobschema";
-import { ColorRing } from 'react-loader-spinner'
+import { ColorRing } from 'react-loader-spinner';
 
-const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
+const ApplyJobCard = ({ SelectJob }) => {
 
     const initialValues = {
         Name: '',
@@ -21,10 +19,8 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
         Upload: '',
     }
 
-
     const [Success, setSuccess] = useState(false);
     const [Loader, setLoader] = useState(false);
-
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue } = useFormik({
         initialValues: initialValues,
@@ -39,7 +35,6 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
                 formData.append('contactno', values.phone);
                 formData.append('resume', values.Upload);
                 const GetToken = localStorage.getItem("token");
-                console.log(values);
                 await axios.post(`https://gojob-x5qp.onrender.com/api/jobapply`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -47,20 +42,13 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
                     }
                 })
                     .then(Response => {
-                        console.log(Response.data);
-                        // setPhone("");
-                        // setName("");
-                        // setEmail("");
-                        // setUpload("");
                         setJobId("");
-                        setSuccess(Response.data.message)
-                        setLoader(false)
+                        setSuccess(Response.data.message);
+                        setLoader(false);
                         action.resetForm();
-                        // setApplyJob(Response.data);
                     })
             }
             catch (error) {
-                console.log("dawd", error);
                 if (error.response.data.error) {
                     setApplyMessage(error.response.data.error)
                 }
@@ -72,14 +60,8 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
     const handleApply = (jobId) => {
         handleSubmit();
         setJobId(jobId);
-
     }
 
-    // const [phone, setPhone] = useState('');
-    // const [ApplyJob, setApplyJob] = useState([]);
-    // const [Name, setName] = useState("");
-    // const [Email, setEmail] = useState("");
-    // const [Upload, setUpload] = useState("");
     const [jobId, setJobId] = useState("");
     const [ApplyMessage, setApplyMessage] = useState("");
     const [popupVisible, setPopupVisible] = useState(false);
@@ -92,7 +74,7 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
     const notify = (message) => toast(message);
 
     const NEWApply = () => {
-        const RemoveToken = localStorage.getItem("token"); console.log("awd", RemoveToken);
+        const RemoveToken = localStorage.getItem("token");
         handleCheckboxClick();
         if (!RemoveToken) {
             navigate('/signin');
@@ -100,47 +82,7 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
         }
     }
 
-    // const getApply = async () => {
-    //     try {
-    //         const formData = new FormData();
-    //         formData.append('jobId', jobId);
-    //         formData.append('name', Name);
-    //         formData.append('email', Email);
-    //         formData.append('contactno', phone);
-    //         formData.append('resume', Upload);
-    //         const GetToken = localStorage.getItem("token");
-    //         await axios.post(`https://gojob-x5qp.onrender.com/api/jobapply`, formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data',
-    //                 'authorization': GetToken
-    //             }
-    //         })
-    //             .then(Response => {
-    //                 console.log(Response.data);
-    //                 setPhone("");
-    //                 setName("");
-    //                 setEmail("");
-    //                 setUpload("");
-    //                 setJobId("");
-    //                 // setApplyJob(Response.data);
-    //             })
-    //     }
-    //     catch (error) {
-    //         console.log("dawd", error);
-    //         if (error.response.data.error) {
-    //             setApplyMessage(error.response.data.error)
-    //         }
-    //     }
-    // }
 
-
-
-
-
-
-    // useEffect(() => {
-    //     getApply();
-    // }, [])
 
     return (
         <>
@@ -153,73 +95,6 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
                             <React.Fragment>
                                 <h6 className="fw-bold mb-2">{SelectJob.jobTitle}</h6>
                                 <h6 className="text-secondary mt-2">Remote</h6>
-                                {/* <div className="main-pop" onClick={NEWApply}>
-                                    <Popup trigger={
-                                        <button className="btn btn-primary rounded-pill"> Apply Now </button>
-                                    } modal>
-                                        <div className="container blue-pop p-5">
-                                            <h5 className="mb-2"><b>Appy For A Job</b></h5>
-
-                                            <div className="company-name mt-3">
-                                                <label htmlFor="" className="text-start d-flex">
-                                                    Name
-                                                </label>
-                                                {
-                                                    () => setJobId(SelectJob._id)
-                                                }
-                                                <input
-                                                    className="form-control"
-                                                    type="text"
-                                                    value={Name}
-                                                    onChange={(e) => setName(e.target.value)}
-                                                    aria-label="default input example"
-                                                />
-                                            </div>
-                                            <div className="company-name mt-3">
-                                                <label htmlFor="" className="text-start d-flex">
-                                                    Email
-                                                </label>
-                                                <input
-                                                    className="form-control"
-                                                    type="email"
-                                                    value={Email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                    aria-label="default input example"
-                                                />
-                                            </div>
-                                            <div className="company-name mt-3">
-                                                <label htmlFor="exampleInputnumber" className="form-label">
-                                                    <b>Phone No.</b>
-                                                </label>
-                                                <PhoneInput
-                                                    placeholder="Enter phone number"
-                                                    value={phone}
-                                                    onChange={setPhone}
-                                                    defaultCountry="US"
-                                                    international
-                                                />
-                                            </div>
-                                            <div className="company-name mt-3">
-                                                <label htmlFor="exampleInputnumber" className="form-label">
-                                                    <b>Upload Resume</b>
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    className="form-control"
-                                                    id="inputGroupFile02"
-                                                    // value={Upload}
-                                                    onChange={(e) => { setUpload(e.target.files[0]); setJobId(SelectJob._id); }}
-                                                />
-                                            </div>
-                                            <div className="text-center mt-3">
-                                                <button type="button" className="btn btn-primary w-100" onClick={getApply}>
-                                                    Apply
-                                                </button>
-                                            </div>
-                                            {ApplyMessage !== "" ? <h5 className="text-danger text-center mt-3">{ApplyMessage}</h5> : null}
-                                        </div>
-                                    </Popup>
-                                </div> */}
                                 <button className="btn btn-primary rounded-pill" onClick={NEWApply}> Apply Now </button>
                                 {
                                     popupVisible && (
@@ -253,9 +128,7 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
                                                         <label htmlFor="" className="text-start d-flex">
                                                             Name
                                                         </label>
-                                                        {/* {
-                                                            () => setJobId(SelectJob._id)
-                                                        } */}
+
                                                         <input
                                                             className="form-control"
                                                             type="text"
@@ -286,13 +159,7 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
                                                         <label htmlFor="exampleInputnumber" className="form-label">
                                                             <b>Phone No.</b>
                                                         </label>
-                                                        {/* <PhoneInput
-                                                        placeholder="Enter phone number"
-                                                        value={phone}
-                                                        onChange={setPhone}
-                                                        defaultCountry="US"
-                                                        international
-                                                    /> */}
+
                                                         <input
                                                             className="form-control"
                                                             type="tel"
@@ -334,7 +201,6 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
                                         </div>
                                     )
                                 }
-
 
                                 <hr />
 
@@ -381,7 +247,6 @@ const ApplyJobCard = ({ SelectJob, SearchData, SelectCard }) => {
                                 </ul>
                                 <ToastContainer />
                             </React.Fragment>
-
                         </div>
                     </div>
                 </div >

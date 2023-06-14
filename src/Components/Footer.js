@@ -7,7 +7,6 @@ const Footer = () => {
 
             <div className="main-height">
                 <div className="content">
-                    {/* Your page content goes here */}
                     <footer className="footer mt-auto py-3 bg-dark">
                         <div className="container text-center">
                             <ul className="nav justify-content-center">

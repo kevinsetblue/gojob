@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useForm } from "react-hook-form";
 
 
 
@@ -58,9 +57,7 @@ const EmployersPostJob = () => {
 
 
 
-    const handleApprove = (
-        data, actions
-    ) => {
+    const handleApprove = (data, actions) => {
         return actions.order.capture().then(function (details) {
             setPaid(true);
             const formFields = {};
@@ -73,31 +70,15 @@ const EmployersPostJob = () => {
                 status: details.purchase_units[0].payments.captures.status,
                 amount: details.purchase_units[0].amount.value
             };
-
-
             const GetToken = localStorage.getItem("token");
-            // var newStore = {
-
-            //     companyName: Text,
-            //     email: Email,
-            //     jobTitle: Jobtitle,
-            //     salary: Salary,
-            //     location: location,
-            //     jobDetails: jobDetails,
-            //     jobRequirements: Requirement
-            // };
-            // console.log("newStore", newStore);
-            // console.log("all", all);
-
-            axios
-                .post("https://gojob-x5qp.onrender.com/api/employer/jobpost", payload,
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'authorization': GetToken
-                        }
+            axios.post("https://gojob-x5qp.onrender.com/api/employer/jobpost", payload,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': GetToken
                     }
-                )
+                }
+            )
                 .then((response) => {
                     navigate('/employerspostjob');
                 })
@@ -108,24 +89,8 @@ const EmployersPostJob = () => {
     };
 
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({});
-
-    const onSubmit = (event) => {
-        const form = event.target;
-        const formData = new FormData(form);
-        setFormData(formData);
-        handleApprove()
-    };
-
-
-
 
     const navigate = useNavigate();
-    // const notify = (message) => toast(message);
 
     const [showPopup, setShowPopup] = useState(false);
 
@@ -134,21 +99,19 @@ const EmployersPostJob = () => {
     };
 
     const NEWApply = () => {
-        const RemoveToken = localStorage.getItem("token");
+        const RemoveToken = localStorage.getItem("Employertoken");
         togglePopup();
         if (!RemoveToken) {
             navigate('/employersignin');
-            // notify('Please Login');
         }
     }
 
     const [pricevalue, setPricevalue] = useState([]);
     const getprice = () => {
-        // const GetToken = localStorage.getItem("admintoken");
         axios.get('https://gojob-x5qp.onrender.com/api/jobprice')
             .then(response => {
                 console.log(response.data.price);
-                setPricevalue(response.data.price)
+                setPricevalue(response.data.price);
             })
     }
 
@@ -160,7 +123,6 @@ const EmployersPostJob = () => {
 
     const [pricedaysvalue, setPricedaysvalue] = useState([]);
     const getjob = () => {
-        // const GetToken = localStorage.getItem("admintoken");
         axios.get('https://gojob-x5qp.onrender.com/api/jobdays')
             .then(response => {
                 console.log(response.data.days);
@@ -193,8 +155,6 @@ const EmployersPostJob = () => {
                                     showPopup && (
                                         <div className="popup">
                                             <div className="blue-pop">
-
-
                                                 <form onSubmit={handleFormSubmit}>
                                                     <div className="company-name mt-3">
                                                         <label htmlFor="" className="text-start text-black d-flex">
@@ -302,9 +262,7 @@ const EmployersPostJob = () => {
                                                                     >
                                                                         <PayPalButtons
                                                                             createOrder={(data, actions) => handleCreateOrder(data, actions)}
-                                                                            onApprove={(data, actions) => handleApprove(
-                                                                                data, actions
-                                                                            )}
+                                                                            onApprove={(data, actions) => handleApprove(data, actions)}
                                                                         />
                                                                         {paid && <p>Payment successful!</p>}
                                                                     </PayPalScriptProvider>
@@ -314,12 +272,6 @@ const EmployersPostJob = () => {
                                                     </div>
                                                 </form>
                                                 <button onClick={togglePopup}>Close</button>
-
-
-
-
-
-
                                             </div>
                                         </div>
                                     )

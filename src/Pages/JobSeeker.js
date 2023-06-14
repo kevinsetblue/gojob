@@ -29,14 +29,9 @@ const JobSeeker = ({ setUser }) => {
     }
 
 
-
-
-
-
     const [TableUser, setTableUser] = useState([]);
 
     const GetToken = localStorage.getItem("admintoken");
-    // const GetToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJmZmFjNmFkZDM5NjdhMzYxMDg4NDkiLCJpYXQiOjE2ODA5MjYwOTYsImV4cCI6MTY4MDkyOTY5Nn0.1U_o9KDtL3VIsIBk_ASjGdJmvZXo7xeswQJ2ksX60ho"
 
     const getTableData = () => {
 
@@ -49,7 +44,6 @@ const JobSeeker = ({ setUser }) => {
             }
         )
             .then(response => {
-                // console.log(response.data.info);
                 setTableUser(response.data.info);
                 setLoader(false);
             })
@@ -81,8 +75,8 @@ const JobSeeker = ({ setUser }) => {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div class="navbar-nav">
-                    <div class="nav-item text-nowrap">
+                <div className="navbar-nav">
+                    <div className="nav-item text-nowrap">
                         <button className="btn btn-light" onClick={handleSignOut}>
                             Sign out
                         </button>

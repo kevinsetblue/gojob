@@ -10,12 +10,16 @@ import { useNavigate } from "react-router-dom";
 import GoogleButton from 'react-google-button';
 import { EmployerRagisterSchema } from "../Schema/EmployerRegisterInSchema";
 import { ColorRing } from 'react-loader-spinner'
+import { BiShow, BiHide } from "react-icons/bi";
 
 
-const EmployerRegister = ({ setEmployerUser }) => {
+const EmployerRegister = ({ setUser }) => {
 
 
-
+    const [ShowPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!ShowPassword);
+    };
     const [phoneNumber, setphoneNumber] = useState('');
     const [Register, setRegister] = useState(false);
     const [NotRegisterd, setNotRegisterd] = useState(false);
@@ -45,14 +49,13 @@ const EmployerRegister = ({ setEmployerUser }) => {
                     password: values.password,
                     phoneNumber: values.phoneNumber,
                 });
-                const token = response.data.token;
-                localStorage.setItem("token", token);
+                const Employertoken = response.data.token;
+                localStorage.setItem("token", Employertoken);
                 if (response.data.user && response.data.user.name) {
-                    setEmployerUser(response.data.user.name);
+                    setUser(response.data.user.name);
                 }
                 action.resetForm();
                 navigate('/employerspostjob');
-
             }
             catch (error) {
                 console.log(error);
@@ -83,10 +86,10 @@ const EmployerRegister = ({ setEmployerUser }) => {
             const response = await axios.post('https://gojob-x5qp.onrender.com/api/employer/register/google', { idToken });
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
-            setEmployerUser(response.data.user.name);
-            // window.location.href = '/';
+            setUser(response.data.user.name);
             navigate('/employerspostjob')
-        } catch (error) {
+        }
+        catch (error) {
             if (error.response && error.response.status === 400) {
                 if (error.response.data.error) {
                     setNotRegisterd(false);
@@ -97,7 +100,6 @@ const EmployerRegister = ({ setEmployerUser }) => {
             else {
                 setNotRegisterd(true);
             }
-            // window.location.href = '/signin';
         }
     };
 
@@ -236,8 +238,9 @@ const EmployerRegister = ({ setEmployerUser }) => {
                                     <label htmlFor="exampleInputPassword1" className="form-label">
                                         <b>Password</b>
                                     </label>
+                                    {ShowPassword ? <BiShow className="BiShow m-2" onClick={togglePasswordVisibility} /> : <BiHide className="BiShow m-2" onClick={togglePasswordVisibility} />}
                                     <input
-                                        type="password"
+                                        type={ShowPassword ? "text" : "password"}
                                         name="password"
                                         className="form-control"
                                         id="exampleInputPassword1"

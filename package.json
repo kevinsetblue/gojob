@@ -19,6 +19,8 @@
     "mantine-react-table": "^1.0.0-beta.2",
     "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-autocomplete-hint": "^2.0.0",
+    "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
     "react-icons": "^4.8.0",

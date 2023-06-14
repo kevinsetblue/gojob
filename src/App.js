@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './Components/Navbar';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import SignIn from './Pages/SignIn';
 import Footer from './Components/Footer';
 import FindJobs from './Pages/FindJobs';
@@ -17,13 +17,26 @@ import AllEmployer from './Pages/AllEmployer';
 import AllJobs from './Pages/AllJobs';
 import Pricing from './Pages/Pricing';
 import ChangeDuration from './Pages/ChangeDuration';
+
+
+function ProtectedPath({ children }) {
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+  if (!token) {
+    navigate('/adminlogin');
+  }
+  return children
+}
+
+
+
+
+
 function App() {
 
   const [User, setUser] = useState(null);
   const [EmployerUser, setEmployerUser] = useState(null);
   const [pricevalue, setPricevalue] = useState([]);
-
-
 
   const location = useLocation().pathname;
   const isEmployerRoute = location === '/employerspostjob';
@@ -38,23 +51,26 @@ function App() {
       <>
         <Routes>
           <Route exact path="/adminlogin" element={<AdminLogin setUser={setUser} />} />
-          <Route exact path="/jobseeker" element={<JobSeeker setUser={setUser} />} />
-          <Route exact path="/allemployer" element={<AllEmployer setUser={setUser} />} />
-          <Route exact path="/alljobs" element={<AllJobs setUser={setUser} />} />
-          <Route exact path="/pricing" element={<Pricing setUser={setUser} />} />
-          <Route exact path="/changeduration" element={<ChangeDuration setUser={setUser} />} />
-        </Routes>
+          <Route exact path="/jobseeker" element={<ProtectedPath><JobSeeker setUser={setUser} /></ProtectedPath>} />
+          <Route exact path="/allemployer" element={<ProtectedPath><AllEmployer setUser={setUser} /></ProtectedPath>} />
+          <Route exact path="/alljobs" element={<ProtectedPath><AllJobs setUser={setUser} /></ProtectedPath>} />
+          <Route exact path="/pricing" element={<ProtectedPath><Pricing setUser={setUser} /></ProtectedPath>} />
+          <Route exact path="/changeduration" element={<ProtectedPath><ChangeDuration setUser={setUser} /></ProtectedPath>} />
+        </Routes >
       </>
     )
   }
 
   return (
     <>
-      {isEmployerRoute ? (
-        <EmployeNavbar EmployerUser={EmployerUser} setEmployerUser={setEmployerUser} />
-      ) : (
-        isJobSeekerRoute || isEmployerListRoute || isAllJobsRoute || isPricingRoute || isChangeDurationRoute ? null : <Navbar User={User} setUser={setUser} />
-      )}
+      {
+        isEmployerRoute ? <EmployeNavbar EmployerUser={EmployerUser} setEmployerUser={setEmployerUser} />
+          : isJobSeekerRoute ||
+            isEmployerListRoute ||
+            isAllJobsRoute ||
+            isPricingRoute ||
+            isChangeDurationRoute ? null : <Navbar User={User} setUser={setUser} />
+      }
       <Routes>
         <Route exact path="/" element={<FindJobs />} />
         <Route exact path="/signin" element={<SignIn User={User} setUser={setUser} />} />
@@ -88,7 +104,6 @@ function App() {
         location !== '/changeduration' &&
         location !== '/forgetpassword' &&
         <Footer />
-
       }
     </>
   );

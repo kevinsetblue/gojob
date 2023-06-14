@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import { SignInGoJob } from "../Schema/Index";
 import { BsArrowRightShort } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import '../Pages/SignIn.css';
 import GoogleEmployeeLogin from "../Components/GoogleEmployeeLogin";
@@ -60,38 +59,6 @@ const SignIn = ({ setUser, setGoogleUser }) => {
             }
         }
     });
-
-
-    // const handleGoogleLogin = async () => {
-    //     try {
-    //         const response = await axios.get('http://10.10.10.29:3000/api/auth/google');
-    //         GoogleLoginCallback();
-    //         window.location.href = response.data.redirectUrl;
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    // const GoogleLoginCallback = () => {
-    //     useEffect(() => {
-    //         const urlSearchParams = new URLSearchParams(window.location.search);
-    //         const params = Object.fromEntries(urlSearchParams.entries());
-
-    //         axios.post('http://10.10.10.29:3000/api/auth/google/callback', params)
-    //             .then(response => {
-    //                 // localStorage.setItem('token', response.data.token);
-    //                 // localStorage.setItem('user', JSON.stringify(response.data.user));
-    //                 const token = response.data.token;
-    //                 localStorage.setItem("token", token);
-    //                 localStorage.setItem("user", JSON.stringify(response.data.user))
-    //                 window.location.href = '/';
-    //             })
-    //             .catch(error => {
-    //                 console.log(error);
-    //                 window.location.href = '/signin';
-    //             });
-    //     }, []);
-    // }
 
 
 

@@ -18,14 +18,13 @@ const GoogleEmployeeLogin = () => {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             window.location.href = '/';
-        } catch (error) {
+        }
+        catch (error) {
             console.log(error);
-            // window.location.href = '/signin';
         }
     };
 
-    const handleGoogleFailure = (error) => {
-    };
+    const handleGoogleFailure = (error) => { };
 
     useEffect(() => {
         const initGoogleAPI = async () => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { useFormik } from "formik";
 import { RagisterSchema } from "../Schema/RagisterSchema";
 import axios from 'axios';
@@ -10,16 +9,22 @@ import PhoneInput from 'react-phone-number-input';
 import { useNavigate } from "react-router-dom";
 import GoogleButton from 'react-google-button';
 import { ColorRing } from 'react-loader-spinner';
+import { BiShow, BiHide } from "react-icons/bi";
 
 
 const Ragister = ({ setUser }) => {
 
+
+    const [ShowPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => setShowPassword(!ShowPassword);
 
     const [phoneNumber, setphoneNumber] = useState('');
     const [Register, setRegister] = useState(false);
     const [NotRegisterd, setNotRegisterd] = useState(false);
     const [ErrorMessage, setErrorMessage] = useState('');
     const [Loader, setLoader] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -50,9 +55,7 @@ const Ragister = ({ setUser }) => {
                 localStorage.setItem("user", JSON.stringify(response.data.user))
                 setUser(response.data.user.name);
                 action.resetForm();
-                // setLoader(false);
                 navigate('/');
-
             }
             catch (error) {
                 console.log(error);
@@ -85,8 +88,8 @@ const Ragister = ({ setUser }) => {
             localStorage.setItem('user', JSON.stringify(response.data.user));
             setUser(response.data.user.name);
             window.location.href = '/';
-        } catch (error) {
-
+        }
+        catch (error) {
             if (error.response && error.response.status === 400) {
                 if (error.response.data.error) {
                     setNotRegisterd(false);
@@ -97,7 +100,6 @@ const Ragister = ({ setUser }) => {
             else {
                 setNotRegisterd(true);
             }
-            // window.location.href = '/signin';
         }
     };
 
@@ -212,21 +214,6 @@ const Ragister = ({ setUser }) => {
                                     />
                                     {errors.email && touched.email ? <h6 className="text-danger">{errors.email}</h6> : null}
 
-                                    {/* <label htmlFor="exampleInputnumber" className="form-label">
-                                        <b>Phone No.</b>
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="phoneNumber"
-                                        className="form-control"
-                                        id="exampleInputnumber1"
-                                        aria-describedby="numberHelp"
-                                        value={values.phoneNumber}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    {errors.phoneNumber && touched.phoneNumber ? <h6 className="text-danger">{errors.phoneNumber}</h6> : null} */}
-
                                     <label htmlFor="exampleInputnumber" className="form-label">
                                         <b>Phone No.</b>
                                     </label>
@@ -240,14 +227,13 @@ const Ragister = ({ setUser }) => {
                                         defaultCountry="IN"
                                         international
                                     />
-                                    {errors.phoneNumber && touched.phoneNumber ? (
-                                        <h6 className="text-danger">{errors.phoneNumber}</h6>
-                                    ) : null}
+                                    {errors.phoneNumber && touched.phoneNumber ? <h6 className="text-danger">{errors.phoneNumber}</h6> : null}
                                     <label htmlFor="exampleInputPassword1" className="form-label">
                                         <b>Password</b>
                                     </label>
+                                    {ShowPassword ? <BiShow className="BiShow m-2" onClick={togglePasswordVisibility} /> : <BiHide className="BiShow m-2" onClick={togglePasswordVisibility} />}
                                     <input
-                                        type="password"
+                                        type={ShowPassword ? "text" : "password"}
                                         name="password"
                                         className="form-control"
                                         id="exampleInputPassword1"

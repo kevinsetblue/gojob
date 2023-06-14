@@ -6,11 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ChangeDuration = ({ setUser }) => {
 
-
-
-
     const navigate = useNavigate();
-
 
     useEffect(() => {
         const user = localStorage.getItem('user');
@@ -28,11 +24,6 @@ const ChangeDuration = ({ setUser }) => {
     }
 
 
-
-
-    // const [status, setStatus] = useState(null);
-    // const [message, setMessage] = useState(null);
-
     const [newPrice, setNewPrice] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -45,10 +36,6 @@ const ChangeDuration = ({ setUser }) => {
         event.preventDefault();
         setError('');
         setSuccess('');
-        // if (!newPrice) {
-        //     setError('Please enter a valid price!');
-        //     return;
-        // }
         updatePrice(newPrice);
     };
 
@@ -81,7 +68,6 @@ const ChangeDuration = ({ setUser }) => {
 
     const [pricevalue, setPricevalue] = useState([]);
     const getjob = () => {
-        // const GetToken = localStorage.getItem("admintoken");
         axios.get('https://gojob-x5qp.onrender.com/api/jobdays')
             .then(response => {
                 console.log(response.data.days);
@@ -126,18 +112,7 @@ const ChangeDuration = ({ setUser }) => {
             <SideBar />
 
             <div className="container job-change mt-4">
-                {/* <form className="d-flex col-md-9 ms-sm-auto col-lg-10 px-md-4" onSubmit={handleFormSubmit}>
-                    <label>
-                        Duration of Job:
-                        <input
-                            className="form-control me-2 d-flex col-md-9 ms-sm-auto col-lg-10 px-md-4"
-                            type="number"
-                            value={pricevalue}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <button className="btn btn-primary btn-sm" type="submit" onClick={updatePrice}>Update</button>
-                </form> */}
+
                 <form className="d-flex col-md-9 ms-sm-auto col-lg-10 px-md-4" onSubmit={handleFormSubmit}>
                     Duration of Job:
                     <input
