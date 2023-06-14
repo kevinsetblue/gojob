@@ -19,18 +19,6 @@ import Pricing from './Pages/Pricing';
 import ChangeDuration from './Pages/ChangeDuration';
 
 
-function ProtectedPath({ children }) {
-  const token = localStorage.getItem('token');
-  const navigate = useNavigate();
-  if (!token) {
-    navigate('/adminlogin');
-  }
-  return children
-}
-
-
-
-
 
 function App() {
 
@@ -51,11 +39,11 @@ function App() {
       <>
         <Routes>
           <Route exact path="/adminlogin" element={<AdminLogin setUser={setUser} />} />
-          <Route exact path="/jobseeker" element={<ProtectedPath><JobSeeker setUser={setUser} /></ProtectedPath>} />
-          <Route exact path="/allemployer" element={<ProtectedPath><AllEmployer setUser={setUser} /></ProtectedPath>} />
-          <Route exact path="/alljobs" element={<ProtectedPath><AllJobs setUser={setUser} /></ProtectedPath>} />
-          <Route exact path="/pricing" element={<ProtectedPath><Pricing setUser={setUser} /></ProtectedPath>} />
-          <Route exact path="/changeduration" element={<ProtectedPath><ChangeDuration setUser={setUser} /></ProtectedPath>} />
+          <Route exact path="/jobseeker" element={<JobSeeker setUser={setUser} />} />
+          <Route exact path="/allemployer" element={<AllEmployer setUser={setUser} />} />
+          <Route exact path="/alljobs" element={<AllJobs setUser={setUser} />} />
+          <Route exact path="/pricing" element={<Pricing setUser={setUser} />} />
+          <Route exact path="/changeduration" element={<ChangeDuration setUser={setUser} />} />
         </Routes >
       </>
     )
