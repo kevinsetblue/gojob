@@ -48,6 +48,15 @@ function App() {
       </>
     )
   }
+  else if (location === '/employerspostjob') {
+    return (
+      <>
+        <EmployeNavbar EmployerUser={EmployerUser} setEmployerUser={setEmployerUser} />
+        <EmployersPostJob pricevalue={pricevalue} />
+        <Footer />
+      </>
+    )
+  }
 
   return (
     <>

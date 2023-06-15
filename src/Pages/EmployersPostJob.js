@@ -107,12 +107,16 @@ const EmployersPostJob = () => {
     }
 
     const [pricevalue, setPricevalue] = useState([]);
-    const getprice = () => {
-        axios.get('https://gojob-x5qp.onrender.com/api/jobprice')
-            .then(response => {
-                console.log(response.data.price);
-                setPricevalue(response.data.price);
-            })
+    const getprice = async () => {
+        try {
+            await axios.get('https://gojob-x5qp.onrender.com/api/jobprice')
+                .then(response => {
+                    setPricevalue(response.data.price);
+                })
+        }
+        catch (error) {
+            console.log('Error :' + error);
+        }
     }
 
     useEffect(() => {
@@ -122,12 +126,16 @@ const EmployersPostJob = () => {
 
 
     const [pricedaysvalue, setPricedaysvalue] = useState([]);
-    const getjob = () => {
-        axios.get('https://gojob-x5qp.onrender.com/api/jobdays')
-            .then(response => {
-                console.log(response.data.days);
-                setPricedaysvalue(response.data.days)
-            })
+    const getjob = async () => {
+        try {
+            await axios.get('https://gojob-x5qp.onrender.com/api/jobdays')
+                .then(response => {
+                    setPricedaysvalue(response.data.days);
+                })
+        }
+        catch (error) {
+            console.log('Error :' + error);
+        }
     }
 
     useEffect(() => {

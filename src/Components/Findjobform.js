@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { BiSearch } from "react-icons/bi";
 import './FindJobForm.css'
 import JobFeedTab from "./JobFeedTab";
-import { Hint } from 'react-autocomplete-hint';
+
 
 
 
@@ -20,13 +20,6 @@ const Findjobform = () => {
 
     const [titles, setTitles] = useState([]);
     const [companies, setCompanies] = useState([]);
-
-    const options = [
-        { id: 1, label: "MERN Stack Developer" },
-        { id: '2', label: "MEAN Stack Developer" },
-        { id: 3, label: "React" },
-        { id: 4, label: "SDE" }
-    ];
 
 
     var aa = 0;
@@ -118,19 +111,17 @@ const Findjobform = () => {
                                             <div className="col-md-6">
                                                 <div className="input-group">
                                                     <span className="input-group-text bg-white border-1"><b>What</b></span>
-                                                    <Hint options={options}>
-                                                        <input
-                                                            ref={inputRef}
-                                                            type="text"
-                                                            aria-label="First name"
-                                                            className="form-control"
-                                                            placeholder="job title,keywords"
-                                                            value={JobTitle}
-                                                            onChange={(e) => setJobTitle(e.target.value)}
-                                                            style={showBorder ? { border: '1px solid red' } : {}}
-                                                            list="jobTitles"
-                                                        />
-                                                    </Hint>
+                                                    <input
+                                                        ref={inputRef}
+                                                        type="text"
+                                                        aria-label="First name"
+                                                        className="form-control"
+                                                        placeholder="job title,keywords"
+                                                        value={JobTitle}
+                                                        onChange={(e) => setJobTitle(e.target.value)}
+                                                        style={showBorder ? { border: '1px solid red' } : {}}
+                                                        list="jobTitles"
+                                                    />
                                                     <datalist id="jobTitles">
                                                         {titles.map(title => (
                                                             <option key={title} value={title}> {title} </option>
@@ -216,18 +207,16 @@ const Findjobform = () => {
                                                 <div className="col-md-6">
                                                     <div className="input-group">
                                                         <span className="input-group-text bg-white border-1"><b>What</b></span>
-                                                        <Hint options={options}>
-                                                            <input
-                                                                ref={inputRef}
-                                                                type="text"
-                                                                aria-label="First name"
-                                                                className="form-control"
-                                                                placeholder="job title,keywords"
-                                                                value={JobTitle}
-                                                                onChange={(e) => setJobTitle(e.target.value)}
-                                                                style={showBorder ? { border: '1px solid red' } : {}}
-                                                            />
-                                                        </Hint>
+                                                        <input
+                                                            ref={inputRef}
+                                                            type="text"
+                                                            aria-label="First name"
+                                                            className="form-control"
+                                                            placeholder="job title,keywords"
+                                                            value={JobTitle}
+                                                            onChange={(e) => setJobTitle(e.target.value)}
+                                                            style={showBorder ? { border: '1px solid red' } : {}}
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">

@@ -11,7 +11,6 @@ const Pricing = ({ setUser }) => {
 
     const navigate = useNavigate();
 
-
     useEffect(() => {
         const user = localStorage.getItem('user');
         if (user) {
@@ -34,17 +33,12 @@ const Pricing = ({ setUser }) => {
 
     const handleInputChange = (event) => {
         setPricevalue(event.target.value);
-
     };
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
         setError('');
         setSuccess('');
-        // if (!newPrice) {
-        //     setError('Please enter a valid price!');
-        //     return;
-        // }
         updatePrice(newPrice);
     };
 
@@ -78,7 +72,6 @@ const Pricing = ({ setUser }) => {
 
     const [pricevalue, setPricevalue] = useState([]);
     const getprice = () => {
-        // const GetToken = localStorage.getItem("admintoken");
         axios.get('https://gojob-x5qp.onrender.com/api/jobprice')
             .then(response => {
                 console.log(response.data.price);
@@ -127,19 +120,6 @@ const Pricing = ({ setUser }) => {
 
 
             <div className="container mt-4">
-                {/* <form className="d-flex col-md-9 ms-sm-auto col-lg-10 px-md-4" onSubmit={handleFormSubmit}>
-                    <input
-                        className="form-control me-2"
-                        type="number"
-                        placeholder="enter price"
-                        aria-label="Search"
-                        value={pricevalue}
-                        onChange={handleInputChange}
-                    />
-                    <button className="btn btn-outline-success" type="submit">
-                        Update Price
-                    </button>
-                </form> */}
                 <form className="d-flex col-md-9 ms-sm-auto col-lg-10 px-md-4" onSubmit={handleFormSubmit}>
                     <label>
                         Change Pricing:

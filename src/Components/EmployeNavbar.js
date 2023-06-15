@@ -58,7 +58,6 @@ const EmployeNavbar = ({ EmployerUser, setEmployerUser }) => {
                                                         <span className="navbar-text text-white ml-2">
                                                             Sign out
                                                         </span>
-
                                                     </>
                                                     : "Sign in"
                                             }
