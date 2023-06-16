@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { useFormik } from "formik";
 import axios from 'axios';
 import 'react-phone-number-input/style.css';
@@ -170,8 +169,6 @@ const EmployerRegister = ({ setUser }) => {
                                             console.error('Google API client library not initialized.');
                                             return;
                                         }
-
-
                                         auth2.getAuthInstance().signIn().then(handleGoogleLogin, handleGoogleFailure);
                                     }}
                                 />

@@ -44,7 +44,7 @@ const Pricing = ({ setUser }) => {
 
     const updatePrice = (price) => {
         const url = 'https://gojob-x5qp.onrender.com/api/admin/setpricing';
-        const authToken = localStorage.getItem('admintoken'); // Get authorization token from localStorage
+        const authToken = localStorage.getItem('admintoken');
 
         const requestBody = {
             price: pricevalue
@@ -71,12 +71,15 @@ const Pricing = ({ setUser }) => {
 
 
     const [pricevalue, setPricevalue] = useState([]);
-    const getprice = () => {
-        axios.get('https://gojob-x5qp.onrender.com/api/jobprice')
-            .then(response => {
-                console.log(response.data.price);
-                setPricevalue(response.data.price)
-            })
+    const getprice = async () => {
+        try {
+            await axios.get('https://gojob-x5qp.onrender.com/api/jobprice')
+                .then(response => {
+                    setPricevalue(response.data.price)
+                })
+        } catch (error) {
+            console.log('Error :' + error);
+        }
     }
 
     useEffect(() => {

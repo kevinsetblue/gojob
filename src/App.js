@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './Components/Navbar';
-import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import SignIn from './Pages/SignIn';
 import Footer from './Components/Footer';
 import FindJobs from './Pages/FindJobs';
@@ -20,11 +20,13 @@ import ChangeDuration from './Pages/ChangeDuration';
 
 
 
+
+
 function App() {
 
   const [User, setUser] = useState(null);
   const [EmployerUser, setEmployerUser] = useState(null);
-  const [pricevalue, setPricevalue] = useState([]);
+  const [pricevalue] = useState([]);
 
   const location = useLocation().pathname;
   const isEmployerRoute = location === '/employerspostjob';
@@ -75,7 +77,7 @@ function App() {
         <Route exact path="/forgetpassword" element={<ForgetPassword />} />
         <Route exact path="/employerspostjob" element={<EmployersPostJob pricevalue={pricevalue} />} />
         <Route exact path="/ragister" element={<Ragister setUser={setUser} />} />
-        <Route exact path="/employerregister" element={<EmployerRegister />} />
+        <Route exact path="/employerregister" element={<EmployerRegister setUser={setUser} />} />
         <Route exact path="/adminlogin" element={<AdminLogin setUser={setUser} />} />
         <Route exact path="/jobseeker" element={<JobSeeker setUser={setUser} />} />
         <Route exact path="/allemployer" element={<AllEmployer setUser={setUser} />} />

@@ -182,10 +182,8 @@ const AllJobs = ({ setUser }) => {
                 )
             }
 
+            {Status ? <h5 className="text-success text-center">{Status}</h5> : null}
 
-            {
-                Status ? <h5 className="text-success text-center">{Status}</h5> : null
-            }
             <div className="container data-table">
                 <div className="table-responsive">
                     <table className="table">
@@ -200,15 +198,13 @@ const AllJobs = ({ setUser }) => {
                         </thead>
 
                         <tbody>
-
-
                             {TableUser && TableUser.map((Data, id) => {
+
                                 const jobId = Data.jobId;
                                 var nm = Data.isActive;
 
                                 return (
                                     <React.Fragment key={id}>
-
                                         <tr>
                                             <td>
                                                 <Moment format="DD/MM/YYYY">

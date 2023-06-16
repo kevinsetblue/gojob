@@ -15,12 +15,8 @@ const Findjobform = () => {
     const [showBorder, setShowBorder] = useState(false);
     const [Loader, setLoader] = useState(true);
     const [NoData, setNoData] = useState("");
-
-
-
     const [titles, setTitles] = useState([]);
     const [companies, setCompanies] = useState([]);
-
 
     var aa = 0;
 
@@ -71,23 +67,24 @@ const Findjobform = () => {
     }
 
     useEffect(() => {
-        getJobData()
+        getJobData();
     }, []);
 
 
+    const fetchTitlesAndCompanies = async () => {
+        try {
+            const response = await fetch('https://gojob-x5qp.onrender.com/api/jobfields');
+            const data = await response.json();
+            setTitles(data.titles);
+            setCompanies(data.companies);
+        }
+        catch (error) {
+            console.error('Error :' + error);
+        }
+    }
+
 
     useEffect(() => {
-        async function fetchTitlesAndCompanies() {
-            try {
-                const response = await fetch('https://gojob-x5qp.onrender.com/api/jobfields');
-                const data = await response.json();
-                setTitles(data.titles);
-                setCompanies(data.companies);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
         fetchTitlesAndCompanies();
     }, []);
 

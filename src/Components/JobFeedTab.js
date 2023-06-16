@@ -32,9 +32,9 @@ const JobFeedTab = ({ SearchData, NoData }) => {
                                         <div className="jobsearch-ResultsList" >
                                             <li>
                                                 <div className="card mt-4" onClick={() => SelectCard(data)}>
-                                                    {
-                                                        id === 0 ? () => SelectCard(data) : null
-                                                    }
+
+                                                    {id === 0 ? () => SelectCard(data) : null}
+
                                                     <table
                                                         className="jobCard_mainContent big6_visualChanges"
                                                         cellPadding={0}

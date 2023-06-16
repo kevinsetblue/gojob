@@ -101,9 +101,9 @@ const ApplyJobCard = ({ SelectJob }) => {
                                         <div className="popup">
                                             <div className="container blue-pop">
                                                 <h5 className="mb-2"><b>Appy For A Job</b></h5>
-                                                {
-                                                    Success ? <h4 className="text-success">{Success}</h4> : null
-                                                }
+
+                                                {Success ? <h4 className="text-success">{Success}</h4> : null}
+
                                                 <div className="loader-center text-center">
                                                     {
                                                         Loader ? <ColorRing

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+
 const EmployeNavbar = ({ EmployerUser, setEmployerUser }) => {
 
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const EmployeNavbar = ({ EmployerUser, setEmployerUser }) => {
         }
     }, []);
 
-    const handleSignOut = () => {
+    const SignOut = () => {
         localStorage.removeItem("Employertoken");
         localStorage.removeItem("user");
         setEmployerUser(null);
@@ -50,7 +51,7 @@ const EmployeNavbar = ({ EmployerUser, setEmployerUser }) => {
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
                                     <Link className="nav-link text-black" to='/employersignin'>
-                                        <button className="btn btn-primary btn-sm" onClick={handleSignOut}>
+                                        <button className="btn btn-primary btn-sm" onClick={SignOut}>
                                             <RiAccountCircleLine style={{ fontSize: '20px' }} />
                                             {
                                                 EmployerUser ?

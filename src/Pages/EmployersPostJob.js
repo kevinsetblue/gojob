@@ -16,7 +16,6 @@ const EmployersPostJob = () => {
     const [jobDetails, setJobDetails] = useState("");
     const [Requirement, setRequirement] = useState("");
     const [paid, setPaid] = useState(false);
-    const [all, setAll] = useState("sef");
     const [formData, setFormData] = useState(null);
 
     const [store, setStore] = useState({
@@ -139,7 +138,7 @@ const EmployersPostJob = () => {
     }
 
     useEffect(() => {
-        getjob()
+        getjob();
     }, []);
 
 
@@ -347,7 +346,7 @@ const EmployersPostJob = () => {
                     </div>
 
                 </div>
-            </div >
+            </div>
         </>
     );
 };

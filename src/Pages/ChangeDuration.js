@@ -42,7 +42,7 @@ const ChangeDuration = ({ setUser }) => {
 
     const updatePrice = (price) => {
         const url = 'https://gojob-x5qp.onrender.com/api/admin/setdays';
-        const authToken = localStorage.getItem('admintoken'); // Get authorization token from localStorage
+        const authToken = localStorage.getItem('admintoken');
 
         const requestBody = {
             days: pricevalue
@@ -67,12 +67,17 @@ const ChangeDuration = ({ setUser }) => {
 
 
     const [pricevalue, setPricevalue] = useState([]);
-    const getjob = () => {
-        axios.get('https://gojob-x5qp.onrender.com/api/jobdays')
-            .then(response => {
-                console.log(response.data.days);
-                setPricevalue(response.data.days)
-            })
+    const getjob = async () => {
+        try {
+            await axios.get('https://gojob-x5qp.onrender.com/api/jobdays')
+                .then(response => {
+                    console.log(response.data.days);
+                    setPricevalue(response.data.days)
+                })
+
+        } catch (error) {
+            console.log('Error :' + error);
+        }
     }
 
     useEffect(() => {

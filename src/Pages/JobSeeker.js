@@ -21,7 +21,7 @@ const JobSeeker = ({ setUser }) => {
     }, []);
 
 
-    function handleSignOut() {
+    function SignOut() {
         localStorage.removeItem("admintoken");
         localStorage.removeItem("adminuser");
         setUser(null);
@@ -33,23 +33,25 @@ const JobSeeker = ({ setUser }) => {
 
     const GetToken = localStorage.getItem("admintoken");
 
-    const getTableData = () => {
-
-        axios.get('https://gojob-x5qp.onrender.com/api/admin/alljobseeker',
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': GetToken
+    const getTableData = async () => {
+        try {
+            await axios.get('https://gojob-x5qp.onrender.com/api/admin/alljobseeker',
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': GetToken
+                    }
                 }
-            }
-        )
-            .then(response => {
-                setTableUser(response.data.info);
-                setLoader(false);
-            })
+            )
+                .then(response => {
+                    setTableUser(response.data.info);
+                    setLoader(false);
+                })
+
+        } catch (error) {
+            console.log('Error :' + error);
+        }
     }
-
-
 
 
     useEffect(() => {
@@ -77,7 +79,7 @@ const JobSeeker = ({ setUser }) => {
                 </button>
                 <div className="navbar-nav">
                     <div className="nav-item text-nowrap">
-                        <button className="btn btn-light" onClick={handleSignOut}>
+                        <button className="btn btn-light" onClick={SignOut}>
                             Sign out
                         </button>
                     </div>
