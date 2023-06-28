@@ -7,7 +7,6 @@ const Navbar = ({ User, setUser, }) => {
 
     const navigate = useNavigate();
 
-
     useEffect(() => {
         const user = localStorage.getItem('user');
         if (user) {
@@ -52,18 +51,13 @@ const Navbar = ({ User, setUser, }) => {
                         <span className="navbar-text">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-
                                     <Link className="nav-link text-black" to='/signin'>
                                         <button className="btn btn-primary btn-sm" onClick={handleSignOut}>
                                             <RiAccountCircleLine style={{ fontSize: '20px' }} />
                                             {
-                                                User ?
-                                                    <>
-                                                        <span className="navbar-text text-white ml-2">
-                                                            Sign out
-                                                        </span>
-
-                                                    </>
+                                                User ? <span className="navbar-text text-white ml-2">
+                                                    Sign out
+                                                </span>
                                                     : "Sign in"
                                             }
                                         </button>

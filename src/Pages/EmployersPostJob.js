@@ -8,6 +8,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 
 const EmployersPostJob = () => {
+
     const [Text, setText] = useState("");
     const [Email, setEmail] = useState("");
     const [Jobtitle, setJobtitle] = useState("");
@@ -17,21 +18,6 @@ const EmployersPostJob = () => {
     const [Requirement, setRequirement] = useState("");
     const [paid, setPaid] = useState(false);
     const [formData, setFormData] = useState(null);
-
-    const [store, setStore] = useState({
-        orderId: "",
-        payerId: "",
-        paymentId: "",
-        status: "",
-        amount: "",
-        companyName: "",
-        email: "",
-        jobTitle: "",
-        salary: "",
-        location: "",
-        jobDetails: "",
-        jobRequirements: ""
-    });
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -69,7 +55,7 @@ const EmployersPostJob = () => {
                 status: details.purchase_units[0].payments.captures.status,
                 amount: details.purchase_units[0].amount.value
             };
-            const GetToken = localStorage.getItem("token");
+            const GetToken = localStorage.getItem("Employertoken");
             axios.post("https://gojob-x5qp.onrender.com/api/employer/jobpost", payload,
                 {
                     headers: {
@@ -93,9 +79,7 @@ const EmployersPostJob = () => {
 
     const [showPopup, setShowPopup] = useState(false);
 
-    const togglePopup = () => {
-        setShowPopup(!showPopup);
-    };
+    const togglePopup = () => setShowPopup(!showPopup);
 
     const NEWApply = () => {
         const RemoveToken = localStorage.getItem("Employertoken");
@@ -119,7 +103,7 @@ const EmployersPostJob = () => {
     }
 
     useEffect(() => {
-        getprice()
+        getprice();
     }, []);
 
 

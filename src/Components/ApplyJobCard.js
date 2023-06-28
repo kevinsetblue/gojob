@@ -46,7 +46,7 @@ const ApplyJobCard = ({ SelectJob }) => {
                         setSuccess(Response.data.message);
                         setLoader(false);
                         action.resetForm();
-                    })
+                    });
             }
             catch (error) {
                 if (error.response.data.error) {
@@ -91,8 +91,7 @@ const ApplyJobCard = ({ SelectJob }) => {
                 SelectJob && <div className="modal-dialog position-sticky" role="document" style={{ 'top': '15px' }}>
                     <div className="modal-content shadow border-0" style={{ borderRadius: '14px' }}>
                         <div className="modal-body p-5">
-
-                            <React.Fragment>
+                            <>
                                 <h6 className="fw-bold mb-2">{SelectJob.jobTitle}</h6>
                                 <h6 className="text-secondary mt-2">Remote</h6>
                                 <button className="btn btn-primary rounded-pill" onClick={NEWApply}> Apply Now </button>
@@ -246,10 +245,10 @@ const ApplyJobCard = ({ SelectJob }) => {
                                     </li>
                                 </ul>
                                 <ToastContainer />
-                            </React.Fragment>
+                            </>
                         </div>
                     </div>
-                </div >
+                </div>
             }
 
 

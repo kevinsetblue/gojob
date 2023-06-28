@@ -55,11 +55,9 @@ const ChangeDuration = ({ setUser }) => {
             }
         })
             .then(response => {
-                console.log('Duration of Job Days Updated.', response.data.message);
                 setSuccess('Duration of Job Days Updated.');
             })
             .catch(error => {
-                console.error('Please enter correct jobId!', error);
                 setError('Please enter correct jobId!');
             });
     };
@@ -81,7 +79,7 @@ const ChangeDuration = ({ setUser }) => {
     }
 
     useEffect(() => {
-        getjob()
+        getjob();
     }, []);
 
 

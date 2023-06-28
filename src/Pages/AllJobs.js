@@ -16,7 +16,6 @@ const AllJobs = ({ setUser }) => {
 
     const navigate = useNavigate();
 
-
     useEffect(() => {
         const user = localStorage.getItem('user');
         if (user) {
@@ -35,44 +34,44 @@ const AllJobs = ({ setUser }) => {
 
     const GetToken = localStorage.getItem("admintoken");
 
-    const getTableData = () => {
-
-        axios.get('https://gojob-x5qp.onrender.com/api/admin/alljobs',
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': GetToken
+    const getTableData = async () => {
+        try {
+            await axios.get('https://gojob-x5qp.onrender.com/api/admin/alljobs',
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': GetToken
+                    }
                 }
-            }
-        )
-            .then(response => {
-                setTableUser(response.data.info);
-                setLoader(false);
-            })
+            )
+                .then(response => {
+                    setTableUser(response.data.info);
+                    setLoader(false);
+                })
+
+        } catch (error) {
+            console.log('Error :' + error);
+        }
     }
 
+
     const [popupVisible, setPopupVisible] = useState(false);
-
-
-
     const [Jobid, setJobid] = useState(null);
     const [Status, setStaus] = useState(false);
     const [isActive, setIsActive] = useState(null);
-    const handleCheckboxClick = (jobId, isActive, isChecked) => {
+
+    const handleCheckboxClick = (jobId, isActive) => {
         setPopupVisible(true);
         setJobid(jobId);
         setIsActive(isActive);
     }
 
-    const notify = (message) => {
-        toast.success(message);
-    };
+    const notify = (message) => toast.success(message);
 
     const Opendata = () => {
 
         const GetToken = localStorage.getItem("admintoken");
-        if (Number.isInteger(isActive)) {
-        }
+
         var kk;
 
         if (isActive === 1) {
@@ -104,8 +103,6 @@ const AllJobs = ({ setUser }) => {
                 }
             })
     }
-
-
 
 
     useEffect(() => {
@@ -142,7 +139,6 @@ const AllJobs = ({ setUser }) => {
 
             <SideBar />
 
-
             <div className="loader-center text-center">
                 {
                     Loader ? <ColorRing
@@ -157,7 +153,6 @@ const AllJobs = ({ setUser }) => {
                         : null
                 }
             </div>
-
 
             {
                 popupVisible && (
@@ -198,10 +193,9 @@ const AllJobs = ({ setUser }) => {
                         </thead>
 
                         <tbody>
-                            {TableUser && TableUser.map((Data, id) => {
+                            {TableUser.map((Data, id) => {
 
                                 const jobId = Data.jobId;
-                                var nm = Data.isActive;
 
                                 return (
                                     <React.Fragment key={id}>
@@ -217,9 +211,7 @@ const AllJobs = ({ setUser }) => {
                                             <td>
                                                 <div className="badge rounded-pill bg-danger">{Data.jobTitle}</div>
                                             </td>
-                                            <td>
-                                                {Data.daysRemaining}
-                                            </td>
+                                            <td>{Data.daysRemaining}</td>
                                             <td>
                                                 <div className="form-check form-switch">
                                                     <input

@@ -20,8 +20,6 @@ import ChangeDuration from './Pages/ChangeDuration';
 
 
 
-
-
 function App() {
 
   const [User, setUser] = useState(null);
@@ -46,7 +44,7 @@ function App() {
           <Route exact path="/alljobs" element={<AllJobs setUser={setUser} />} />
           <Route exact path="/pricing" element={<Pricing setUser={setUser} />} />
           <Route exact path="/changeduration" element={<ChangeDuration setUser={setUser} />} />
-        </Routes >
+        </Routes>
       </>
     )
   }

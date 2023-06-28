@@ -62,7 +62,6 @@ const EmployeNavbar = ({ EmployerUser, setEmployerUser }) => {
                                                     </>
                                                     : "Sign in"
                                             }
-
                                         </button>
                                     </Link>
                                 </li>

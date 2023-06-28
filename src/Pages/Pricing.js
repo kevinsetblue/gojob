@@ -115,12 +115,7 @@ const Pricing = ({ setUser }) => {
                 </div>
             </header>
 
-
             <SideBar />
-
-
-
-
 
             <div className="container mt-4">
                 <form className="d-flex col-md-9 ms-sm-auto col-lg-10 px-md-4" onSubmit={handleFormSubmit}>
@@ -143,12 +138,6 @@ const Pricing = ({ setUser }) => {
                 {success && <p className="d-flex col-md-9 ms-sm-auto col-lg-10 px-md-4 text-success">{success}</p>}
                 {error && <p className="d-flex col-md-9 ms-sm-auto col-lg-10 px-md-4 text-danger">{error}</p>}
             </div>
-
-
-
-
-
-
 
         </>
     );
